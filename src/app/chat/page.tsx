@@ -29,19 +29,8 @@ export default function ChatPage() {
   return (
     <main>
       <h1>Chat</h1>
-      <div aria-live="polite">
-        {messages.map((m, i) => (
-          <p key={i} className={m.role === 'user' ? 'text-right' : ''}>{m.content}</p>
-        ))}
-      </div>
-      <form onSubmit={sendMessage}>
-        <input
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          placeholder="Enter expense..."
-        />
-        <button type="submit">Send</button>
-      </form>
+      <MessageList messages={messages} />
+      <InputBar value={input} onChange={setInput} onSubmit={sendMessage} />
     </main>
   );
 }
