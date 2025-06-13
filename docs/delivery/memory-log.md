@@ -18,3 +18,9 @@
 
 ## Entry 6
 - Started PBI-2-001 to implement NLP parsing endpoint
+
+## Entry 7
+- Completed PBI-2-001 with OpenAI parse endpoint and test. Next: begin PBI-3-001 chat UI skeleton.
+
+## Entry 8
+- Started PBI-3-001 and implemented basic chat page linking to parse API.
