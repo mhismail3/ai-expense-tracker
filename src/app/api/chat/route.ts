@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabaseClient';
 import { openai } from '@/lib/openai';
+import { checkRateLimit } from '@/lib/rateLimiter';
 
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for') || 'global';
+  if (!checkRateLimit(ip)) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
+
   const { userId, question } = await req.json();
+  if (typeof userId !== 'string' || typeof question !== 'string') {
+    return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
+  }
   const from = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
   const { data: expenses, error } = await supabase
     .from('expenses')

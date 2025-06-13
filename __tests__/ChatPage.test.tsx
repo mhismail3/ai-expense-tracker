@@ -32,3 +32,23 @@ test('routes questions to insights API', async () => {
   await waitFor(() => expect(screen.getByText('You spent $5')).toBeInTheDocument());
   expect(global.fetch).toHaveBeenCalledWith('/api/chat', expect.anything());
 });
+
+test('has responsive layout container', () => {
+  render(<ChatPage />);
+  expect(screen.getByRole('main')).toHaveClass('app-container');
+});
+
+test('shows question message and response', async () => {
+  const user = userEvent.setup();
+  (global.fetch as jest.Mock).mockResolvedValueOnce({
+    json: () => Promise.resolve({ data: '42' }),
+  });
+  render(<ChatPage />);
+  await user.type(screen.getByPlaceholderText('Enter expense...'), 'How much?');
+  await user.click(screen.getByRole('button', { name: /send/i }));
+  await waitFor(() => {
+    expect(screen.getByText('How much?')).toBeInTheDocument();
+    expect(screen.getByText('42')).toBeInTheDocument();
+  });
+  expect(global.fetch).toHaveBeenCalledWith('/api/chat', expect.anything());
+});

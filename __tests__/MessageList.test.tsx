@@ -7,6 +7,8 @@ test('renders messages with user alignment', () => {
     { role: 'assistant', content: 'hello' },
   ];
   render(<MessageList messages={messages} />);
+  const list = screen.getByRole('list');
+  expect(list).toHaveAttribute('aria-live', 'polite');
   const items = screen.getAllByRole('listitem');
   expect(items[0]).toHaveClass('text-right');
   expect(items[0]).toHaveTextContent('hi');

@@ -1,9 +1,74 @@
+:root {
+  --bg-color: #fff;
+  --text-color: #000;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --bg-color: #000;
+    --text-color: #fff;
+  }
+}
+
 body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 641px) {
+  .app-container {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+  }
+}
+
+.sidebar {
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.content {
+  padding: 1rem;
+}
+
+@media (min-width: 641px) {
+  .sidebar {
+    border-bottom: none;
+    border-right: 1px solid #ccc;
+  }
 }
 
 .text-right {
   text-align: right;
+}
+
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background: #eee;
+  padding: 0.5rem 0;
+}
+
+@media (min-width: 640px) {
+  .mobile-nav {
+    display: none;
+  }
 }
