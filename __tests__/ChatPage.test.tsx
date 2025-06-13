@@ -32,3 +32,8 @@ test('routes questions to insights API', async () => {
   await waitFor(() => expect(screen.getByText('You spent $5')).toBeInTheDocument());
   expect(global.fetch).toHaveBeenCalledWith('/api/chat', expect.anything());
 });
+
+test('has responsive layout container', () => {
+  render(<ChatPage />);
+  expect(screen.getByRole('main')).toHaveClass('app-container');
+});
