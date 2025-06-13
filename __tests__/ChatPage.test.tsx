@@ -33,6 +33,11 @@ test('routes questions to insights API', async () => {
   expect(global.fetch).toHaveBeenCalledWith('/api/chat', expect.anything());
 });
 
+test('has responsive layout container', () => {
+  render(<ChatPage />);
+  expect(screen.getByRole('main')).toHaveClass('app-container');
+});
+
 test('shows question message and response', async () => {
   const user = userEvent.setup();
   (global.fetch as jest.Mock).mockResolvedValueOnce({

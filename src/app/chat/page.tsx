@@ -27,10 +27,15 @@ export default function ChatPage() {
   }
 
   return (
-    <main>
-      <h1>Chat</h1>
-      <MessageList messages={messages} />
-      <InputBar value={input} onChange={setInput} onSubmit={sendMessage} />
+    <main className="app-container">
+      <nav className="sidebar">
+        <a href="/history">History</a>
+      </nav>
+      <section className="content">
+        <h1>Chat</h1>
+        <MessageList messages={messages} />
+        <InputBar value={input} onChange={setInput} onSubmit={sendMessage} />
+      </section>
     </main>
   );
 }
