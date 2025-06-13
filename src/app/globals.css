@@ -1,7 +1,21 @@
+:root {
+  --bg-color: #fff;
+  --text-color: #000;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --bg-color: #000;
+    --text-color: #fff;
+  }
+}
+
 body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .app-container {
@@ -40,4 +54,21 @@ body {
 
 .text-right {
   text-align: right;
+}
+
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background: #eee;
+  padding: 0.5rem 0;
+}
+
+@media (min-width: 640px) {
+  .mobile-nav {
+    display: none;
+  }
 }
