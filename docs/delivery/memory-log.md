@@ -24,3 +24,19 @@
 
 ## Entry 8
 - Started PBI-3-001 and implemented basic chat page linking to parse API.
+
+## Entry 9
+- Improved chat UI with MessageList and InputBar components. Added auto-scroll and updated backlog.
+
+## Entry 10
+- Reviewed testing strategy and added Jest/RTL test suites covering auth pages, chat components, and API route.
+
+## Entry 11
+- Started and completed PBI-4-001 to provide Insights API.
+- Created `/api/chat` endpoint that summarizes last 30 days of expenses via OpenAI.
+- Added test for the new route, updated README, backlog, and PBI doc.
+
+## Entry 12
+- Started PBI-4-002 to connect chat UI with the insights API.
+- Implemented UI logic to route questions to `/api/chat`.
+- Updated tests, docs, and backlog.

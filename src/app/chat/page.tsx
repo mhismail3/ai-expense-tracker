@@ -1,22 +1,28 @@
 'use client';
 import { useState } from 'react';
+import MessageList, { Message } from '@/components/MessageList';
+import InputBar from '@/components/InputBar';
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
 
-  async function sendMessage(e: React.FormEvent) {
-    e.preventDefault();
-    const userMessage = { role: 'user', content: input };
+  async function sendMessage() {
+    const text = input;
+    const userMessage: Message = { role: 'user', content: text };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
-    const res = await fetch('/api/parse', {
+    const isQuestion = text.trim().endsWith('?');
+    const endpoint = isQuestion ? '/api/chat' : '/api/parse';
+    const body = isQuestion ? { userId: '1', question: text } : { text };
+    const res = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: input }),
+      body: JSON.stringify(body),
     });
     const { data } = await res.json();
-    const botMessage = { role: 'assistant', content: JSON.stringify(data) };
+    const content = typeof data === 'string' ? data : JSON.stringify(data);
+    const botMessage: Message = { role: 'assistant', content };
     setMessages(prev => [...prev, botMessage]);
   }
 
