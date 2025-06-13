@@ -7,3 +7,20 @@ body {
 .text-right {
   text-align: right;
 }
+
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background: #eee;
+  padding: 0.5rem 0;
+}
+
+@media (min-width: 640px) {
+  .mobile-nav {
+    display: none;
+  }
+}
